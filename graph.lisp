@@ -10,6 +10,10 @@
                                         list-edges)))
   )
 
+(defun is-connected (nodeA nodeB graph)
+  "Check if nodeA and nodeB are connected in the given graph"
+  )
+
 (defun make-graph-adjacency-list (list-nodes list-edges)
   "Make an adjacency list representation given V and E"
   ;;
