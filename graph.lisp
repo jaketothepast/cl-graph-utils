@@ -1,10 +1,6 @@
 ;;; Graph Library in Common Lisp
 ;;; AUTHOR: Jake Windle
 ;;; Provided free of charge, free of licenses, take at will.
-(defpackage :cl-graph-utils
-  (use :cl-user))
-
-(in-package :cl-graph-utils)
 
 (defun node-adjacency-list (node list-edges)
   "Given a list of edges get the adjacency list for a node"
@@ -23,7 +19,6 @@
   ;;
   ;; The adjacency list looks like this
   ;; ((Node (Node2 Node3 Node4)) ... )
-  (mapcar #'(lambda (x) (node-adjacency-list x list-edges)) list-nodes)
+  (mapcar #'(lambda (x)
+              (node-adjacency-list x list-edges)) list-nodes)
   )
-
-(in-package :cl-user)
