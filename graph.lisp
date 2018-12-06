@@ -5,13 +5,15 @@
 (defun node-adjacency-list (node list-edges)
   "Given a list of edges get the adjacency list for a node"
   (list node
-        (remove-if-not #'(lambda (x)
-                           (equalp node (first x)))
-                       list-edges))
+        (mapcar #'second (remove-if-not #'(lambda (x)
+                                            (equalp node (first x)))
+                                        list-edges)))
   )
 
-(defun make-graph (list-nodes list-edges)
-  "For each edge in list-edges, add the tail to the node in list nodes
-adjacency list"
-  (mapcar #'(lambda (x) (node-adj-list x list-edges)) list-nodes)
+(defun make-graph-adjacency-list (list-nodes list-edges)
+  "Make an adjacency list representation given V and E"
+  ;;
+  ;; The adjacency list looks like this
+  ;; ((Node (Node2 Node3 Node4)) ... )
+  (mapcar #'(lambda (x) (node-adjacency-list x list-edges)) list-nodes)
   )
