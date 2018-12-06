@@ -12,6 +12,10 @@
 
 (defun is-connected (nodeA nodeB graph)
   "Check if nodeA and nodeB are connected in the given graph"
+  (let ((node-list (mapcar #'first graph)))
+    ;; TODO - Use the result of find to check if connected
+    (find nodeA node-list)
+    )
   )
 
 (defun make-graph-adjacency-list (list-nodes list-edges)
@@ -20,5 +24,6 @@
   ;; The adjacency list looks like this
   ;; ((Node (Node2 Node3 Node4)) ... )
   (mapcar #'(lambda (x)
-              (node-adjacency-list x list-edges)) list-nodes)
+              (node-adjacency-list x list-edges))
+          list-nodes)
   )
