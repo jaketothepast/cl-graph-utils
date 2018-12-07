@@ -1,6 +1,9 @@
 ;;; Graph Library in Common Lisp
 ;;; AUTHOR: Jake Windle
 ;;; Provided free of charge, free of licenses, take at will.
+
+(ql:quickload "cl-heap")
+
 (defun node-adjacency-list (node list-edges)
   "Given a list of edges get the adjacency list for a node"
   (list node
@@ -34,4 +37,11 @@
           list-nodes)
   )
 
+(defun breadth-first-search (graph qnode)
+  "Perform a breadth first search on the graph"
+  (let ((node-queue (make-instance 'cl-heap:priority-queue))
+        (explored-nodes nil))
+    (cl-heap:enqueue node-queue (first (first graph)) 1)
+    )
+  )
 (setf *new-graph* (make-graph-adjacency-list '(A B) '((A B) (B A))))
