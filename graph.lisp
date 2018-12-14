@@ -37,6 +37,11 @@
           list-nodes)
   )
 
+(defun make-graph-adjacency-matrix (list-nodes list-edges &optional undirected)
+  "Make an adjacency matrix version of a graph"
+  ()
+  )
+
 (defun breadth-first-search (graph qnode)
   "Perform a breadth first search on the graph"
   (let ((node-queue (make-instance 'cl-heap:priority-queue))
