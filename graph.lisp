@@ -41,10 +41,16 @@
   "Predicate for testing if the graph specified is valid"
   ;; For every edge check that 
   (dolist (x list-edges)
-    (if (null
-         ;; The intersection of the list of nodes and the edge should NOT
-         ;; be null at all
-         (intersection list-nodes x))
+    (if (or
+         (null
+          ;; The intersection of the list of nodes and the edge should NOT
+          ;; be null at all
+          (intersection list-nodes x))
+         ;; The count of nodes in any given edge NOT in the node list
+         ;; should never be more than 0
+         (not
+          (zerop
+           (count-if #'(lambda (y) (null (member y list-nodes))) x))))
         (return-from valid-graph-p nil)))
   t
   )
