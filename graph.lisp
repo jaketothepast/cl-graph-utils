@@ -51,12 +51,16 @@
          (not
           (zerop
            (count-if #'(lambda (y) (null (member y list-nodes))) x))))
-        (return-from valid-graph-p nil)))
+        ;; Use return because we want to hop all the way out of calling scope
+        (return nil)))
   t
   )
 
 (defun make-graph-adjacency-matrix (list-nodes list-edges)
   "Make a graph adjacency matrix"
+  (valid-graph-p list-nodes list-edges)
+  (let ((graph (make-array '((length list-nodes) (length list-nodes)))))
+    )
   )
 
 (defun breadth-first-search (graph qnode)
