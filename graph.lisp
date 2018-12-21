@@ -39,6 +39,14 @@
 
 (defun valid-graph-p (list-nodes list-edges)
   "Predicate for testing if the graph specified is valid"
+  ;; For every edge check that 
+  (dolist (x list-edges)
+    (if (null
+         ;; The intersection of the list of nodes and the edge should NOT
+         ;; be null at all
+         (intersection list-nodes x))
+        (return-from valid-graph-p nil)))
+  t
   )
 
 (defun make-graph-adjacency-matrix (list-nodes list-edges)
