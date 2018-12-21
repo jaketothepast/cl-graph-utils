@@ -37,6 +37,14 @@
           list-nodes)
   )
 
+(defun valid-graph-p (list-nodes list-edges)
+  "Predicate for testing if the graph specified is valid"
+  )
+
+(defun make-graph-adjacency-matrix (list-nodes list-edges)
+  "Make a graph adjacency matrix"
+  )
+
 (defun breadth-first-search (graph qnode)
   "Perform a breadth first search on the graph"
   (let ((node-queue (make-instance 'cl-heap:priority-queue))
@@ -44,4 +52,5 @@
     (cl-heap:enqueue node-queue (first (first graph)) 1)
     )
   )
+
 (setf *new-graph* (make-graph-adjacency-list '(A B) '((A B) (B A))))
