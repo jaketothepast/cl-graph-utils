@@ -6,11 +6,9 @@
 
 (defun node-adjacency-list (node list-edges)
   "Given a list of edges get the adjacency list for a node"
-  (list node
-        (mapcar #'second (remove-if-not #'(lambda (x)
-                                            (equalp node (first x)))
-                                        list-edges)))
-  )
+  (mapcar #'second (remove-if-not #'(lambda (x)
+                                      (equalp node (first x)))
+                                  list-edges)))
 
 (defun is-connected (nodeA nodeB graph)
   "Check if nodeA and nodeB are connected in the given graph"
@@ -32,14 +30,19 @@
   ;; ((Node (Node2 Node3 Node4)) ... )
   ;;
   ;; NOTE - Currently only makes directed graphs.
-  (mapcar #'(lambda (x)
-              (node-adjacency-list x list-edges))
-          list-nodes)
+  (let ((tbl (make-hash-table :test #'equalp)))
+    (dolist (node list-nodes)
+      (setf
+       (gethash node tbl)
+       (node-adjacency-list node list-edges))
+      )
+    tbl
+    )
   )
 
 (defun valid-graph-p (list-nodes list-edges)
   "Predicate for testing if the graph specified is valid"
-  ;; For every edge check that 
+  ;; For every edge check that the edge is valid
   (dolist (x list-edges)
     (if (or
          (null
@@ -56,12 +59,6 @@
   t
   )
 
-(defun make-graph-adjacency-matrix (list-nodes list-edges)
-  "Make a graph adjacency matrix"
-  (valid-graph-p list-nodes list-edges)
-  (let ((graph (make-array '((length list-nodes) (length list-nodes)))))
-    )
-  )
 
 (defun breadth-first-search (graph qnode)
   "Perform a breadth first search on the graph"
@@ -71,4 +68,4 @@
     )
   )
 
-(setf *new-graph* (make-graph-adjacency-list '(A B) '((A B) (B A))))
+(setf *new-graph* (make-graph-adjacency-list '(A B C) '((A B) (B A) (A C))))
